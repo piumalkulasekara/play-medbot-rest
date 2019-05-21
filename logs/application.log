@@ -12,3 +12,4 @@
     play.filters.hosts.AllowedHostsFilter
 
 2019-05-21 23:41:31,142 [INFO] from play.api.Play in play-dev-mode-akka.actor.default-dispatcher-14 - Application started (Dev) (no global state)
+2019-05-21 23:53:42,788 [INFO] from play.core.server.AkkaHttpServer in play-dev-mode-shutdown-hook-1 - Stopping server...
