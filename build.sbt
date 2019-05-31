@@ -6,6 +6,7 @@ version := "1.0-SNAPSHOT"
 lazy val root = (project in file(".")).enablePlugins(PlayJava)
 
 scalaVersion := "2.12.8"
+resolvers += "JBoss" at "https://repository.jboss.org/"
 
 libraryDependencies += guice
 
@@ -29,4 +30,3 @@ libraryDependencies += "com.fasterxml.jackson.core" % "jackson-core" % "2.8.11"
 
 // https://mvnrepository.com/artifact/edu.stanford.swrl/swrlapi-drools-engine
 libraryDependencies += "edu.stanford.swrl" % "swrlapi-drools-engine" % "2.0.6"
-
