@@ -1,8 +1,10 @@
+# Created by .ignore support plugin (hsz.mobi)
+### PlayFramework template
 # Ignore Play! working directory #
 bin/
 /db
 .eclipse
-.idea
+.idea/
 /lib/
 /logs/
 /modules
@@ -15,3 +17,5 @@ server.pid
 *.eml
 /dist/
 .cache
+
+.gradle/
