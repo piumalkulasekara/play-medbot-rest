@@ -2,6 +2,7 @@ package controllers;
 
 import play.mvc.Controller;
 
-public class RequestController extends Controller {
+public class ResponseController extends Controller {
+
 
 }

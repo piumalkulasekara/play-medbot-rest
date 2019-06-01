@@ -9,6 +9,7 @@ scalaVersion := "2.12.8"
 resolvers += "JBoss" at "https://repository.jboss.org/"
 
 libraryDependencies += guice
+libraryDependencies += "com.typesafe" % "config" % "1.3.4"
 
 // https://mvnrepository.com/artifact/com.amazonaws/aws-java-sdk-bom
 libraryDependencies += "com.amazonaws" % "aws-java-sdk-bom" % "1.11.562" pomOnly()
