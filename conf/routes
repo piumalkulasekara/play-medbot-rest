@@ -6,6 +6,9 @@
 GET         /                    controllers.HomeController.index(request: Request)
 GET         /help                controllers.HomeController.help()
 
+#initial user text
+POST        /usertext            controllers.RequestController.userText(request: Request)
+
 POST        /postreq             controllers.HomeController.postreq(request: Request)
 
 #POST       /                    controllers.RequestController.getDataFromChat

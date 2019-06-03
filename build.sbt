@@ -31,3 +31,5 @@ libraryDependencies += "com.fasterxml.jackson.core" % "jackson-core" % "2.8.11"
 
 // https://mvnrepository.com/artifact/edu.stanford.swrl/swrlapi-drools-engine
 libraryDependencies += "edu.stanford.swrl" % "swrlapi-drools-engine" % "2.0.6"
+
+libraryDependencies += "com.google.cloud" % "google-cloud-dialogflow" % "0.94.0-alpha"
