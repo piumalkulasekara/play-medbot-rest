@@ -28,7 +28,7 @@ public class RequestController extends Controller {
             Logger.of("extracted from raw text: " + string);
             ObjectNode objectNode = Json.newObject();
             try {
-                objectNode = queryController.executeQuery(awsTextController.getClassifiedText(string).passingValuesForQuering());
+                queryController.executeQuery(awsTextController.getClassifiedText(string).passingValuesForQuering());
 
 
             } catch (SQWRLException e) {
