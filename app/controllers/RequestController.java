@@ -21,14 +21,14 @@ public class RequestController extends Controller {
     public Result userText(Http.Request request) {
         String string = null;
         JsonNode requestBody = request.body().asJson();
-
+        ObjectNode node = null;
         if (requestBody != null) {
             string = requestBody.get("usertext").textValue();
 
             Logger.of("extracted from raw text: " + string);
             ObjectNode objectNode = Json.newObject();
             try {
-                queryController.executeQuery(awsTextController.getClassifiedText(string).passingValuesForQuering());
+                node = queryController.executeQuery(awsTextController.getClassifiedText(string).passingValuesForQuering());
 
 
             } catch (SQWRLException e) {
@@ -39,7 +39,7 @@ public class RequestController extends Controller {
                 return badRequest(e.getLocalizedMessage());
             }
 
-            return ok(Json.toJson(objectNode));
+            return ok(node);
         } else {
             return badRequest();
         }

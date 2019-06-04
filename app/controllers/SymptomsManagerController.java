@@ -13,7 +13,6 @@ public class SymptomsManagerController extends Controller {
     private static SymptomsManagerController symptomsManagerController;
 
     private SymptomsManagerController() {
-        this.symptomsManagerController = new SymptomsManagerController();
     }
 
     public static SymptomsManagerController getInstance() {

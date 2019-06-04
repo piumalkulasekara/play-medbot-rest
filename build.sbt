@@ -33,3 +33,7 @@ libraryDependencies += "com.fasterxml.jackson.core" % "jackson-core" % "2.8.11"
 libraryDependencies += "edu.stanford.swrl" % "swrlapi-drools-engine" % "2.0.6"
 
 libraryDependencies += "com.google.cloud" % "google-cloud-dialogflow" % "0.94.0-alpha"
+
+//// https://mvnrepository.com/artifact/net.sourceforge.owlapi/owlapi-distribution
+//libraryDependencies += "net.sourceforge.owlapi" % "owlapi-distribution" % "5.1.10"
+//

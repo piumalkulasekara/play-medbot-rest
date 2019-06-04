@@ -1,5 +1,6 @@
 package controllers;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import models.Symptom;
 import org.jetbrains.annotations.NotNull;
@@ -35,15 +36,15 @@ public class QueryController extends Controller {
         symptomsManagerController = SymptomsManagerController.getInstance();
 
         //Update existing local ontology if there is a new version available
-        try {
-            updateLocalOntology();
-        } catch (OWLOntologyCreationException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (OWLOntologyStorageException e) {
-            e.printStackTrace();
-        }
+//        try {
+//            updateLocalOntology();
+//        } catch (OWLOntologyCreationException e) {
+//            e.printStackTrace();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        } catch (OWLOntologyStorageException e) {
+//            e.printStackTrace();
+//        }
 
     }
 
@@ -97,7 +98,7 @@ public class QueryController extends Controller {
         //Create OWLOntology instance using OWLAPI
         OWLOntologyManager ontologyManager = OWLManager.createOWLOntologyManager();
 
-        File localFile = new File("src/data/disease_onotology.owl");
+        File localFile = new File("app/data/disease_ontology.owl");
 
         //Load local ontology
         OWLOntology localOntology = ontologyManager.loadOntology(IRI.create(localFile));
@@ -134,7 +135,7 @@ public class QueryController extends Controller {
      * @throws SWRLParseException
      * @throws OWLOntologyCreationException
      */
-    public void executeQuery(List<String> sympList) throws SQWRLException, SWRLParseException, OWLOntologyCreationException {
+    public ObjectNode executeQuery(List<String> sympList) throws SQWRLException, SWRLParseException, OWLOntologyCreationException {
 
         listOfSymptoms = new ArrayList<>();
         for (String symptomName : sympList) {
@@ -149,7 +150,7 @@ public class QueryController extends Controller {
         //Careate OWLOntology instance using OWLAPI
         OWLOntologyManager ontologyManager = OWLManager.createOWLOntologyManager();
 
-        File localFile = new File("src/data/disease_ontology.owl");
+        File localFile = new File("app/data/disease_ontology.owl");
 
         //Load local ontology
         OWLOntology localOntology = ontologyManager.loadOntology(IRI.create(localFile));
@@ -216,9 +217,12 @@ public class QueryController extends Controller {
             Logger.debug("Removed for top 5:" + top5Significance);
 
             responseController = new ResponseController();
-            responseController.generateResponse("symptoms", top5Significance);
+            String test = responseController.generateResponse("symptoms", top5Significance);
 
-            ObjectNode returnSymps = Json.newObject();
+            System.out.println(test);
+
+            ObjectMapper mapper = new ObjectMapper();
+            return mapper.valueToTree(test);
 
             // FIXME: 2019-05-30 what after getting those 5 significant diseases?
 
@@ -234,14 +238,21 @@ public class QueryController extends Controller {
             sendDocDetailsList.add(getSpecialist(diseaseName));
 
             responseController = new ResponseController();
-            responseController.generateResponse("doctor", sendDocDetailsList);
+            String test = responseController.generateResponse("doctor", sendDocDetailsList);
+            System.out.println(test);
 
             Logger.debug("Name: " + diseaseName);
             Logger.debug("Doc is " + getSpecialist(diseaseName));
 
+
+            ObjectMapper mapper = new ObjectMapper();
+            return mapper.valueToTree(test);
+
         } else { //If there aren't any possible disease for the symptom combinations.
             Logger.debug("DECISION: " + result.getNumberOfRows() + " possible diseases found. Invoking Bayesian Network...");
 
+            ObjectMapper mapper = new ObjectMapper();
+            return mapper.valueToTree("{}");
             // TODO: 2019-05-27 Invoke Bayesian Network
         }
     }

@@ -5,6 +5,14 @@ public class Symptom {
     private String name;
     private Boolean hasSymptom;
 
+    public Symptom() {
+    }
+
+    public Symptom(String name, Boolean hasSymptom) {
+        this.name = name;
+        this.hasSymptom = hasSymptom;
+    }
+
     public String getName() {
         return name;
     }

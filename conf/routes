@@ -3,7 +3,7 @@
 # ~~~~
 
 # An example controller showing a sample home page
-GET         /                    controllers.HomeController.index(request: Request)
+GET         /                    controllers.HomeController.index()
 GET         /help                controllers.HomeController.help()
 
 #initial user text
