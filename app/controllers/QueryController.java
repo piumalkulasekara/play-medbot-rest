@@ -1,5 +1,8 @@
 package controllers;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
+import models.Symptom;
 import org.jetbrains.annotations.NotNull;
 import org.semanticweb.owlapi.apibinding.OWLManager;
 import org.semanticweb.owlapi.formats.FunctionalSyntaxDocumentFormat;
@@ -11,6 +14,7 @@ import org.swrlapi.sqwrl.SQWRLResult;
 import org.swrlapi.sqwrl.exceptions.SQWRLException;
 import org.swrlapi.sqwrl.values.SQWRLResultValue;
 import play.Logger;
+import play.libs.Json;
 import play.mvc.Controller;
 
 import java.io.File;
@@ -24,19 +28,23 @@ public class QueryController extends Controller {
     private TreeMap<String, Double> sortedMap = new TreeMap<>();
     private LinkedHashMap<String, Double> sortedEntries = new LinkedHashMap<>();
     private AWSTextController awsHandler = new AWSTextController();
-
+    private ResponseController responseController;
+    private SymptomsManagerController symptomsManagerController;
+    private List<Symptom> listOfSymptoms;
 
     public QueryController() {
+        symptomsManagerController = SymptomsManagerController.getInstance();
+
         //Update existing local ontology if there is a new version available
-        try {
-            updateLocalOntology();
-        } catch (OWLOntologyCreationException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (OWLOntologyStorageException e) {
-            e.printStackTrace();
-        }
+//        try {
+//            updateLocalOntology();
+//        } catch (OWLOntologyCreationException e) {
+//            e.printStackTrace();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        } catch (OWLOntologyStorageException e) {
+//            e.printStackTrace();
+//        }
 
     }
 
@@ -90,7 +98,7 @@ public class QueryController extends Controller {
         //Create OWLOntology instance using OWLAPI
         OWLOntologyManager ontologyManager = OWLManager.createOWLOntologyManager();
 
-        File localFile = new File("src/data/disease_onotology.owl");
+        File localFile = new File("app/data/disease_ontology.owl");
 
         //Load local ontology
         OWLOntology localOntology = ontologyManager.loadOntology(IRI.create(localFile));
@@ -127,12 +135,22 @@ public class QueryController extends Controller {
      * @throws SWRLParseException
      * @throws OWLOntologyCreationException
      */
-    public void executeQuery(List<String> sympList) throws SQWRLException, SWRLParseException, OWLOntologyCreationException {
+    public ObjectNode executeQuery(List<String> sympList) throws SQWRLException, SWRLParseException, OWLOntologyCreationException {
+
+        listOfSymptoms = new ArrayList<>();
+        for (String symptomName : sympList) {
+            Symptom symptom = new Symptom();
+            symptom.setName(symptomName);
+            symptom.setHasSymptom(true);
+            listOfSymptoms.add(symptom);
+        }
+        symptomsManagerController.setSymptomArrayList(listOfSymptoms);
+
 
         //Careate OWLOntology instance using OWLAPI
         OWLOntologyManager ontologyManager = OWLManager.createOWLOntologyManager();
 
-        File localFile = new File("src/data/disease_onotology.owl");
+        File localFile = new File("app/data/disease_ontology.owl");
 
         //Load local ontology
         OWLOntology localOntology = ontologyManager.loadOntology(IRI.create(localFile));
@@ -141,8 +159,9 @@ public class QueryController extends Controller {
         SQWRLQueryEngine queryEngine = SWRLAPIFactory.createSQWRLQueryEngine(localOntology);
 
         List<String> symptomQueryPhrases = new ArrayList<>();
-        for (int i = 0; i < sympList.size(); i++) {
-            symptomQueryPhrases.add("^ dsm:has_symptom(?d, dsm:" + sympList.get(i) + ") ");
+
+        for (int i = 0; i < symptomsManagerController.getSymptomArrayList().size(); i++) {
+            symptomQueryPhrases.add("^ dsm:has_symptom(?d, dsm:" + symptomsManagerController.getSymptomArrayList().get(i) + ") ");
         }
 
         //Build Query to get disease
@@ -176,10 +195,10 @@ public class QueryController extends Controller {
             sortedSymptoms = gradeSymptoms(extractedSymp);
 
 //            Iterator<Map.Entry<String, Double>> it = sortedSymptoms.entrySet().iterator();
-            Logger.debug("Passed List" + sympList);
+            Logger.debug("Passed List" + symptomsManagerController.getSymptomArrayList());
 
             for (Map.Entry entry : sortedSymptoms.entrySet()) {
-                if (sympList.contains(entry.getKey())) {
+                if (symptomsManagerController.getSymptomArrayList().contains(entry.getKey())) {
                     continue;
                 } else {
                     top5Significance.add(entry.getKey().toString());
@@ -197,6 +216,14 @@ public class QueryController extends Controller {
 
             Logger.debug("Removed for top 5:" + top5Significance);
 
+            responseController = new ResponseController();
+            String test = responseController.generateResponse("symptoms", top5Significance);
+
+            System.out.println(test);
+
+            ObjectMapper mapper = new ObjectMapper();
+            return mapper.valueToTree(test);
+
             // FIXME: 2019-05-30 what after getting those 5 significant diseases?
 
 
@@ -206,12 +233,26 @@ public class QueryController extends Controller {
             String nameValue = result.getColumn("Disease").get(0).toString();
             String diseaseName = nameValue.substring(4);
 
+            List<String> sendDocDetailsList = new ArrayList<>();
+            sendDocDetailsList.add(diseaseName);
+            sendDocDetailsList.add(getSpecialist(diseaseName));
+
+            responseController = new ResponseController();
+            String test = responseController.generateResponse("doctor", sendDocDetailsList);
+            System.out.println(test);
+
             Logger.debug("Name: " + diseaseName);
             Logger.debug("Doc is " + getSpecialist(diseaseName));
+
+
+            ObjectMapper mapper = new ObjectMapper();
+            return mapper.valueToTree(test);
 
         } else { //If there aren't any possible disease for the symptom combinations.
             Logger.debug("DECISION: " + result.getNumberOfRows() + " possible diseases found. Invoking Bayesian Network...");
 
+            ObjectMapper mapper = new ObjectMapper();
+            return mapper.valueToTree("{}");
             // TODO: 2019-05-27 Invoke Bayesian Network
         }
     }

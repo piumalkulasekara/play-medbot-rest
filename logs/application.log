@@ -1,135 +1,94 @@
-2019-05-31 22:40:43,019 [ERROR] from application in play-dev-mode-akka.actor.default-dispatcher-8 - 
+2019-06-04 15:48:25,242 [INFO] from play.api.http.EnabledFilters in play-dev-mode-akka.actor.default-dispatcher-2 - Enabled Filters (see <https://www.playframework.com/documentation/latest/Filters>):
 
-! @7c3inji3o - Internal server error, for (GET) [/] ->
+    play.filters.csrf.CSRFFilter
+    play.filters.headers.SecurityHeadersFilter
+    play.filters.hosts.AllowedHostsFilter
+
+2019-06-04 15:48:25,855 [INFO] from play.api.Play in play-dev-mode-akka.actor.default-dispatcher-2 - Application started (Dev) (no global state)
+2019-06-04 15:48:39,567 [DEBUG] from application in application-akka.actor.default-dispatcher-4 - Anatomy: []
+2019-06-04 15:48:39,567 [DEBUG] from application in application-akka.actor.default-dispatcher-4 - Medication: []
+2019-06-04 15:48:39,567 [DEBUG] from application in application-akka.actor.default-dispatcher-4 - Symptoms: [pain]
+2019-06-04 15:48:39,567 [DEBUG] from application in application-akka.actor.default-dispatcher-4 - Hash Map:{symptoms=[pain], anatomy=[], medication=[]}
+2019-06-04 15:48:39,567 [DEBUG] from application in application-akka.actor.default-dispatcher-4 - Hash Before: {symptoms=[pain], anatomy=[], medication=[]}
+2019-06-04 15:48:39,567 [DEBUG] from application in application-akka.actor.default-dispatcher-4 - Symptom List B4: [pain]
+2019-06-04 15:48:39,567 [DEBUG] from application in application-akka.actor.default-dispatcher-4 - Symps: [pain]
+2019-06-04 15:48:53,844 [WARN] from org.drools.core.RuleBaseConfiguration in application-akka.actor.default-dispatcher-4 - Cannot find drools-reteoo.jar on the classpath, switching to phreak
+2019-06-04 15:48:54,132 [ERROR] from application in application-akka.actor.default-dispatcher-4 - 
+
+! @7c4jnp17o - Internal server error, for (POST) [/usertext] ->
  
-play.api.UnexpectedException: Unexpected exception[ProvisionException: Unable to provision, see the following errors:
-
-1) Error injecting constructor, Configuration error: Configuration error[Cannot load class filters.ExampleFilter]
-  at play.api.http.EnabledFilters.<init>(HttpFilters.scala:79)
-  at play.utils.Reflect$.bindingsFromConfiguration(Reflect.scala:72):
-Binding(class play.api.http.EnabledFilters to self) (via modules: com.google.inject.util.Modules$OverrideModule -> play.api.inject.guice.GuiceableModuleConversions$$anon$4)
-  while locating play.api.http.EnabledFilters
-  while locating play.api.http.HttpFilters
-    for the 6th parameter of play.api.http.JavaCompatibleHttpRequestHandler.<init>(HttpRequestHandler.scala:305)
-  while locating play.api.http.JavaCompatibleHttpRequestHandler
-  while locating play.api.http.HttpRequestHandler
-    for the 6th parameter of play.api.DefaultApplication.<init>(Application.scala:253)
-  at play.api.DefaultApplication.class(Application.scala:252)
-  while locating play.api.DefaultApplication
-  while locating play.api.Application
-
-1 error]
-	at play.core.server.DevServerStart$$anon$1.reload(DevServerStart.scala:214)
-	at play.core.server.DevServerStart$$anon$1.get(DevServerStart.scala:144)
-	at play.core.server.AkkaHttpServer.handleRequest(AkkaHttpServer.scala:304)
-	at play.core.server.AkkaHttpServer.$anonfun$createServerBinding$1(AkkaHttpServer.scala:189)
-	at akka.stream.impl.fusing.MapAsync$$anon$30.onPush(Ops.scala:1262)
-	at akka.stream.impl.fusing.GraphInterpreter.processPush(GraphInterpreter.scala:523)
-	at akka.stream.impl.fusing.GraphInterpreter.execute(GraphInterpreter.scala:409)
-	at akka.stream.impl.fusing.GraphInterpreterShell.runBatch(ActorGraphInterpreter.scala:599)
-	at akka.stream.impl.fusing.GraphInterpreterShell$AsyncInput.execute(ActorGraphInterpreter.scala:480)
-	at akka.stream.impl.fusing.GraphInterpreterShell.processEvent(ActorGraphInterpreter.scala:574)
-	at akka.stream.impl.fusing.ActorGraphInterpreter.akka$stream$impl$fusing$ActorGraphInterpreter$$processEvent(ActorGraphInterpreter.scala:742)
-	at akka.stream.impl.fusing.ActorGraphInterpreter$$anonfun$receive$1.applyOrElse(ActorGraphInterpreter.scala:757)
-	at akka.actor.Actor.aroundReceive(Actor.scala:539)
-	at akka.actor.Actor.aroundReceive$(Actor.scala:537)
-	at akka.stream.impl.fusing.ActorGraphInterpreter.aroundReceive(ActorGraphInterpreter.scala:664)
-	at akka.actor.ActorCell.receiveMessage(ActorCell.scala:610)
-	at akka.actor.ActorCell.invoke(ActorCell.scala:579)
-	at akka.dispatch.Mailbox.processMailbox(Mailbox.scala:268)
-	at akka.dispatch.Mailbox.run(Mailbox.scala:229)
-	at akka.dispatch.Mailbox.exec(Mailbox.scala:241)
+play.api.http.HttpErrorHandlerExceptions$$anon$1: Execution exception[[SWRLRuleEngineException: Error creating query engine Drools. Exception: java.lang.NoClassDefFoundError. Message: org/drools/compiler/builder/impl/KnowledgeBuilderImpl]]
+	at play.api.http.HttpErrorHandlerExceptions$.throwableToUsefulException(HttpErrorHandler.scala:351)
+	at play.api.http.DefaultHttpErrorHandler.onServerError(HttpErrorHandler.scala:267)
+	at play.core.server.AkkaHttpServer$$anonfun$1.applyOrElse(AkkaHttpServer.scala:448)
+	at play.core.server.AkkaHttpServer$$anonfun$1.applyOrElse(AkkaHttpServer.scala:446)
+	at scala.concurrent.Future.$anonfun$recoverWith$1(Future.scala:417)
+	at scala.concurrent.impl.Promise.$anonfun$transformWith$1(Promise.scala:41)
+	at scala.concurrent.impl.CallbackRunnable.run$$$capture(Promise.scala:64)
+	at scala.concurrent.impl.CallbackRunnable.run(Promise.scala)
+	at akka.dispatch.BatchingExecutor$AbstractBatch.processBatch(BatchingExecutor.scala:55)
+	at akka.dispatch.BatchingExecutor$BlockableBatch.$anonfun$run$1(BatchingExecutor.scala:92)
+	at scala.runtime.java8.JFunction0$mcV$sp.apply(JFunction0$mcV$sp.java:23)
+	at scala.concurrent.BlockContext$.withBlockContext(BlockContext.scala:85)
+	at akka.dispatch.BatchingExecutor$BlockableBatch.run(BatchingExecutor.scala:92)
+	at akka.dispatch.TaskInvocation.run(AbstractDispatcher.scala:40)
+	at akka.dispatch.ForkJoinExecutorConfigurator$AkkaForkJoinTask.exec(ForkJoinExecutorConfigurator.scala:49)
 	at akka.dispatch.forkjoin.ForkJoinTask.doExec(ForkJoinTask.java:260)
 	at akka.dispatch.forkjoin.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:1339)
 	at akka.dispatch.forkjoin.ForkJoinPool.runWorker(ForkJoinPool.java:1979)
 	at akka.dispatch.forkjoin.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:107)
-Caused by: com.google.inject.ProvisionException: Unable to provision, see the following errors:
-
-1) Error injecting constructor, Configuration error: Configuration error[Cannot load class filters.ExampleFilter]
-  at play.api.http.EnabledFilters.<init>(HttpFilters.scala:79)
-  at play.utils.Reflect$.bindingsFromConfiguration(Reflect.scala:72):
-Binding(class play.api.http.EnabledFilters to self) (via modules: com.google.inject.util.Modules$OverrideModule -> play.api.inject.guice.GuiceableModuleConversions$$anon$4)
-  while locating play.api.http.EnabledFilters
-  while locating play.api.http.HttpFilters
-    for the 6th parameter of play.api.http.JavaCompatibleHttpRequestHandler.<init>(HttpRequestHandler.scala:305)
-  while locating play.api.http.JavaCompatibleHttpRequestHandler
-  while locating play.api.http.HttpRequestHandler
-    for the 6th parameter of play.api.DefaultApplication.<init>(Application.scala:253)
-  at play.api.DefaultApplication.class(Application.scala:252)
-  while locating play.api.DefaultApplication
-  while locating play.api.Application
-
-1 error
-	at com.google.inject.internal.InternalProvisionException.toProvisionException(InternalProvisionException.java:226)
-	at com.google.inject.internal.InjectorImpl$1.get(InjectorImpl.java:1053)
-	at com.google.inject.internal.InjectorImpl.getInstance(InjectorImpl.java:1086)
-	at play.api.inject.guice.GuiceInjector.instanceOf(GuiceInjectorBuilder.scala:443)
-	at play.api.inject.guice.GuiceInjector.instanceOf(GuiceInjectorBuilder.scala:438)
-	at play.api.inject.ContextClassLoaderInjector.$anonfun$instanceOf$2(Injector.scala:119)
-	at play.api.inject.ContextClassLoaderInjector.withContext(Injector.scala:128)
-	at play.api.inject.ContextClassLoaderInjector.instanceOf(Injector.scala:119)
-	at play.api.inject.guice.GuiceApplicationBuilder.build(GuiceApplicationBuilder.scala:156)
-	at play.api.inject.guice.GuiceApplicationLoader.load(GuiceApplicationLoader.scala:22)
-	at play.core.server.DevServerStart$$anon$1.$anonfun$reload$3(DevServerStart.scala:193)
-	at play.utils.Threads$.withContextClassLoader(Threads.scala:22)
-	at play.core.server.DevServerStart$$anon$1.reload(DevServerStart.scala:185)
-	... 23 common frames omitted
-Caused by: play.api.Configuration$$anon$1: Configuration error[Cannot load class filters.ExampleFilter]
-	at play.api.Configuration$.configError(Configuration.scala:171)
-	at play.api.Configuration.reportError(Configuration.scala:1018)
-	at play.api.http.EnabledFilters.$anonfun$filters$2(HttpFilters.scala:102)
-	at scala.collection.TraversableLike.$anonfun$map$1(TraversableLike.scala:237)
-	at scala.collection.mutable.ResizableArray.foreach(ResizableArray.scala:62)
-	at scala.collection.mutable.ResizableArray.foreach$(ResizableArray.scala:55)
-	at scala.collection.mutable.ArrayBuffer.foreach(ArrayBuffer.scala:49)
-	at scala.collection.TraversableLike.map(TraversableLike.scala:237)
-	at scala.collection.TraversableLike.map$(TraversableLike.scala:230)
-	at scala.collection.AbstractTraversable.map(Traversable.scala:108)
-	at play.api.http.EnabledFilters.liftedTree1$1(HttpFilters.scala:95)
-	at play.api.http.EnabledFilters.<init>(HttpFilters.scala:91)
-	at play.api.http.EnabledFilters$$FastClassByGuice$$5bec3932.newInstance(<generated>)
-	at com.google.inject.internal.DefaultConstructionProxyFactory$FastClassProxy.newInstance(DefaultConstructionProxyFactory.java:89)
-	at com.google.inject.internal.ConstructorInjector.provision(ConstructorInjector.java:114)
-	at com.google.inject.internal.ConstructorInjector.construct(ConstructorInjector.java:91)
-	at com.google.inject.internal.ConstructorBindingImpl$Factory.get(ConstructorBindingImpl.java:306)
-	at com.google.inject.internal.ProviderToInternalFactoryAdapter.get(ProviderToInternalFactoryAdapter.java:40)
-	at com.google.inject.internal.SingletonScope$1.get(SingletonScope.java:168)
-	at com.google.inject.internal.InternalFactoryToProviderAdapter.get(InternalFactoryToProviderAdapter.java:39)
-	at com.google.inject.internal.FactoryProxy.get(FactoryProxy.java:62)
-	at com.google.inject.internal.SingleParameterInjector.inject(SingleParameterInjector.java:42)
-	at com.google.inject.internal.SingleParameterInjector.getAll(SingleParameterInjector.java:65)
-	at com.google.inject.internal.ConstructorInjector.provision(ConstructorInjector.java:113)
-	at com.google.inject.internal.ConstructorInjector.construct(ConstructorInjector.java:91)
-	at com.google.inject.internal.ConstructorBindingImpl$Factory.get(ConstructorBindingImpl.java:306)
-	at com.google.inject.internal.FactoryProxy.get(FactoryProxy.java:62)
-	at com.google.inject.internal.SingleParameterInjector.inject(SingleParameterInjector.java:42)
-	at com.google.inject.internal.SingleParameterInjector.getAll(SingleParameterInjector.java:65)
-	at com.google.inject.internal.ConstructorInjector.provision(ConstructorInjector.java:113)
-	at com.google.inject.internal.ConstructorInjector.construct(ConstructorInjector.java:91)
-	at com.google.inject.internal.ConstructorBindingImpl$Factory.get(ConstructorBindingImpl.java:306)
-	at com.google.inject.internal.ProviderToInternalFactoryAdapter.get(ProviderToInternalFactoryAdapter.java:40)
-	at com.google.inject.internal.SingletonScope$1.get(SingletonScope.java:168)
-	at com.google.inject.internal.InternalFactoryToProviderAdapter.get(InternalFactoryToProviderAdapter.java:39)
-	at com.google.inject.internal.FactoryProxy.get(FactoryProxy.java:62)
-	at com.google.inject.internal.InjectorImpl$1.get(InjectorImpl.java:1050)
-	... 34 common frames omitted
-Caused by: java.lang.ClassNotFoundException: filters.ExampleFilter
+Caused by: org.swrlapi.exceptions.SWRLRuleEngineException: Error creating query engine Drools. Exception: java.lang.NoClassDefFoundError. Message: org/drools/compiler/builder/impl/KnowledgeBuilderImpl
+	at org.swrlapi.factory.DefaultSWRLRuleAndQueryEngineFactory.createSQWRLQueryEngine(DefaultSWRLRuleAndQueryEngineFactory.java:111)
+	at org.swrlapi.factory.DefaultSWRLRuleAndQueryEngineFactory.createSQWRLQueryEngine(DefaultSWRLRuleAndQueryEngineFactory.java:82)
+	at org.swrlapi.factory.SWRLAPIFactory.createSQWRLQueryEngine(SWRLAPIFactory.java:61)
+	at controllers.QueryController.executeQuery(QueryController.java:163)
+	at controllers.RequestController.userText(RequestController.java:31)
+	at router.Routes$$anonfun$routes$1.$anonfun$applyOrElse$7(Routes.scala:172)
+	at play.core.routing.HandlerInvokerFactory$$anon$8.resultCall(HandlerInvoker.scala:151)
+	at play.core.routing.HandlerInvokerFactory$$anon$8.resultCall(HandlerInvoker.scala:150)
+	at play.core.routing.HandlerInvokerFactory$JavaActionInvokerFactory$$anon$3$$anon$4$$anon$5.invocation(HandlerInvoker.scala:116)
+	at play.core.j.JavaAction$$anon$1.call(JavaAction.scala:131)
+	at play.mvc.Action.lambda$call$0(Action.java:89)
+	at java.util.Optional.map(Optional.java:215)
+	at play.mvc.Action.call(Action.java:81)
+	at play.http.DefaultActionCreator$1.call(DefaultActionCreator.java:33)
+	at play.core.j.JavaAction.$anonfun$apply$8(JavaAction.scala:191)
+	at scala.concurrent.Future$.$anonfun$apply$1(Future.scala:658)
+	at scala.util.Success.$anonfun$map$1(Try.scala:255)
+	at scala.util.Success.map(Try.scala:213)
+	at scala.concurrent.Future.$anonfun$map$1(Future.scala:292)
+	at scala.concurrent.impl.Promise.liftedTree1$1(Promise.scala:33)
+	at scala.concurrent.impl.Promise.$anonfun$transform$1(Promise.scala:33)
+	at scala.concurrent.impl.CallbackRunnable.run$$$capture(Promise.scala:64)
+	at scala.concurrent.impl.CallbackRunnable.run(Promise.scala)
+	at play.core.j.HttpExecutionContext$$anon$2.run(HttpExecutionContext.scala:79)
+	at play.api.libs.streams.Execution$trampoline$.execute(Execution.scala:72)
+	at play.core.j.HttpExecutionContext.execute(HttpExecutionContext.scala:71)
+	at scala.concurrent.impl.CallbackRunnable.executeWithValue(Promise.scala:72)
+	at scala.concurrent.impl.Promise$KeptPromise$Kept.onComplete(Promise.scala:372)
+	at scala.concurrent.impl.Promise$KeptPromise$Kept.onComplete$(Promise.scala:371)
+	at scala.concurrent.impl.Promise$KeptPromise$Successful.onComplete(Promise.scala:379)
+	at scala.concurrent.impl.Promise.transform(Promise.scala:33)
+	at scala.concurrent.impl.Promise.transform$(Promise.scala:31)
+	at scala.concurrent.impl.Promise$KeptPromise$Successful.transform(Promise.scala:379)
+	at scala.concurrent.Future.map(Future.scala:292)
+	at scala.concurrent.Future.map$(Future.scala:292)
+	at scala.concurrent.impl.Promise$KeptPromise$Successful.map(Promise.scala:379)
+	at scala.concurrent.Future$.apply(Future.scala:658)
+	at play.core.j.JavaAction.apply(JavaAction.scala:192)
+	at play.api.mvc.Action.$anonfun$apply$2(Action.scala:98)
+	at scala.concurrent.Future.$anonfun$flatMap$1(Future.scala:307)
+	... 14 common frames omitted
+Caused by: java.lang.NoClassDefFoundError: org/drools/compiler/builder/impl/KnowledgeBuilderImpl
+	at org.drools.impl.KnowledgeBuilderImpl.<init>(KnowledgeBuilderImpl.java:54)
+	at org.drools.impl.KnowledgeBuilderFactoryServiceImpl.newKnowledgeBuilder(KnowledgeBuilderFactoryServiceImpl.java:47)
+	at org.drools.builder.KnowledgeBuilderFactory.newKnowledgeBuilder(KnowledgeBuilderFactory.java:46)
+	at org.swrlapi.drools.core.DroolsSWRLRuleEngine.<init>(DroolsSWRLRuleEngine.java:118)
+	at org.swrlapi.drools.core.DroolsSWRLRuleEngineCreator.create(DroolsSWRLRuleEngineCreator.java:27)
+	at org.swrlapi.factory.DefaultSWRLRuleAndQueryEngineFactory.createSQWRLQueryEngine(DefaultSWRLRuleAndQueryEngineFactory.java:98)
+	... 53 common frames omitted
+Caused by: java.lang.ClassNotFoundException: org.drools.compiler.builder.impl.KnowledgeBuilderImpl
 	at java.net.URLClassLoader.findClass(URLClassLoader.java:382)
 	at java.lang.ClassLoader.loadClass(ClassLoader.java:424)
 	at java.lang.ClassLoader.loadClass(ClassLoader.java:357)
-	at play.api.http.EnabledFilters.$anonfun$filters$2(HttpFilters.scala:98)
-	... 68 common frames omitted
-2019-05-31 22:41:07,579 [INFO] from play.api.http.EnabledFilters in play-dev-mode-akka.actor.default-dispatcher-2 - Enabled Filters (see <https://www.playframework.com/documentation/latest/Filters>):
-
-    play.filters.csrf.CSRFFilter
-    play.filters.headers.SecurityHeadersFilter
-    play.filters.hosts.AllowedHostsFilter
-
-2019-05-31 22:41:07,641 [INFO] from play.api.Play in play-dev-mode-akka.actor.default-dispatcher-2 - Application started (Dev) (no global state)
-2019-06-01 11:10:12,244 [INFO] from play.api.http.EnabledFilters in play-dev-mode-akka.actor.default-dispatcher-13 - Enabled Filters (see <https://www.playframework.com/documentation/latest/Filters>):
-
-    play.filters.csrf.CSRFFilter
-    play.filters.headers.SecurityHeadersFilter
-    play.filters.hosts.AllowedHostsFilter
-
-2019-06-01 11:10:12,258 [INFO] from play.api.Play in play-dev-mode-akka.actor.default-dispatcher-13 - Application started (Dev) (no global state)
+	... 59 common frames omitted

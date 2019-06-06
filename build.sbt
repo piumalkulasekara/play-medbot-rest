@@ -30,4 +30,11 @@ libraryDependencies += "com.fasterxml.jackson.core" % "jackson-databind" % "2.8.
 libraryDependencies += "com.fasterxml.jackson.core" % "jackson-core" % "2.8.11"
 
 // https://mvnrepository.com/artifact/edu.stanford.swrl/swrlapi-drools-engine
-libraryDependencies += "edu.stanford.swrl" % "swrlapi-drools-engine" % "2.0.6"
+libraryDependencies += "edu.stanford.swrl" % "swrlapi-drools-engine" % "1.1.2"
+
+libraryDependencies += "com.google.cloud" % "google-cloud-dialogflow" % "0.94.0-alpha"
+
+libraryDependencies += "org.drools" % "drools-core" % "6.5.0.Final"
+//// https://mvnrepository.com/artifact/net.sourceforge.owlapi/owlapi-distribution
+//libraryDependencies += "net.sourceforge.owlapi" % "owlapi-distribution" % "5.1.10"
+//
